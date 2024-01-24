@@ -26,6 +26,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 });
 
 Auth::routes();
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 
 
