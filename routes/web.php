@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +14,12 @@ use App\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-// routes for admin only
-Route::prefix('admin')->middleware('admin')->group(function () {
-    Route::get('dashboard', [AdminController::class,'dashboard'])->name('admin.dashboard');
-});
-
+// frontend routes
+Route::get('/', [FrontendController::class, 'home'])->name('front.home');
+Route::get('/about', [FrontendController::class, 'about'])->name('front.about');
+Route::get('/list', [FrontendController::class, 'list'])->name('front.list');
+// frotnednroutes end
 Auth::routes();
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
